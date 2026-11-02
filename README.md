@@ -30,5 +30,4 @@ Biến môi trường: `VANTAI_DB_HOST`, `VANTAI_DB_PORT`, `VANTAI_DB_USER`, `VA
 | `Dockerfile`, `docker-compose.yml`, `docker/entrypoint.sh` | Đóng gói (app + MySQL + noVNC) |
 | `docs/` | Sơ đồ E-R, lược đồ quan hệ, báo cáo Word, bản SQL tham khảo |
 | `.github/workflows/docker.yml` | CI build & đẩy image lên GHCR |
-# Btl_csdl
-# Btl_csdl
+
