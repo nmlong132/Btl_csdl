@@ -1,0 +1,32 @@
+services:
+  db:
+    image: mysql:8.0
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci --log-bin-trust-function-creators=1
+    environment:
+      MYSQL_ROOT_PASSWORD: vantai
+    volumes:
+      - dbdata:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h 127.0.0.1 -uroot -pvantai --silent"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      VANTAI_DB_HOST: db
+      VANTAI_DB_USER: root
+      VANTAI_DB_PASSWORD: vantai
+      VANTAI_DB_DATABASE: vantai
+      VANTAI_SEED: "1"        # đặt "0" để không nạp dữ liệu mẫu
+    ports:
+      - "6080:6080"
+
+volumes:
+  dbdata:
